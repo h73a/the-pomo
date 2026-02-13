@@ -35,9 +35,5 @@ WORKDIR /app
 
 COPY --from=maven-builder /app/target/learning_tracker-0.0.1-SNAPSHOT.jar app.jar
 
-RUN mkdir -p /root/.postgresql/
-
-COPY .postgresql/root.crt /root/.postgresql/root.crt
-
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]

@@ -94,5 +94,6 @@ app/src/main/java/com/example/learningtracker/todolist
 app/src/main/resources/templates/todoForm.html
 app/src/main/resources/templates/todolist.html
 app/src/main/resources/static/css/output.css
+**/init_table.sql
+**/init-scripts/
 init-scripts/init_table.sql
-init-scripts/

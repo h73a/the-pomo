@@ -91,15 +91,15 @@ public class RecordService {
     }
 
     public Integer totalPomodoro(List<Record> recordList) {
-        Integer total = 0;
+        Integer pomodoro = 0;
         if(recordList.size() > 0) {
             for(Record record : recordList) {
-                if(record.getUsesPomodoro()) {
-                    total =+ record.getPomodoro();
+                if (record.getPomodoro() != null) {
+                    pomodoro += record.getPomodoro();
                 }
             }
         }
-        return total;
+        return pomodoro;
     }
 
     public void update(RecordForm form, @AuthenticationPrincipal LoginUserDetails loginUser) {

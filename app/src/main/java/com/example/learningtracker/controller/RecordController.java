@@ -81,15 +81,20 @@ public class RecordController {
     }
 
     @PostMapping("/record/create/do")
-    public String createRecord(@AuthenticationPrincipal LoginUserDetails loginUser, @ModelAttribute @Validated RecordForm recordForm, BindingResult result, Model model) {
+    public String createRecord(@AuthenticationPrincipal LoginUserDetails loginUser, @ModelAttribute @Validated RecordForm recordForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // バリデーションエラーの場合
         if (result.hasErrors()) {
             model.addAttribute("recordForm", recordForm);
             model.addAttribute("lSubject", learningSubjectService.findAllByUserId(loginUser));
-            return "record/recordEditForm";
+            return "record/recordCreateForm";
         }
 
-        recordService.update(recordForm, loginUser);
+        try {
+            recordService.update(recordForm, loginUser);
+            redirectAttributes.addFlashAttribute("successMessage", "学習記録が正常に登録されました。");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "学習記録の登録に失敗しました。");
+        }
         return "redirect:/record";
     }
 
